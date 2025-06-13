@@ -7,7 +7,7 @@ import { MapPin, Navigation, Waves } from 'lucide-react';
 
 const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const [mapboxToken, setMapboxToken] = useState('');
+  const [mapboxToken, setMapboxToken] = useState('pk.eyJ1IjoiZGVuZWt0ZXRydWxzIiwiYSI6ImNtYnYxcjA1NzBnaHYya3MxMzZ1bHppZmIifQ.sDdy-16F9gy5SRlFWVCrBQ');
   const [mapLoaded, setMapLoaded] = useState(false);
   const [boatLocation] = useState({
     lat: 60.3973,
@@ -107,14 +107,13 @@ const Map = () => {
 
   return (
     <div className="space-y-6">
-      {!mapboxToken && (
+      {!mapLoaded && (
         <Card className="p-6 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
           <div className="text-center space-y-4">
             <MapPin className="h-12 w-12 text-blue-500 mx-auto" />
-            <h3 className="text-lg font-semibold">Enter Mapbox Token</h3>
+            <h3 className="text-lg font-semibold">Mapbox Token</h3>
             <p className="text-sm text-muted-foreground">
-              To display the real-time boat tracking map, please enter your Mapbox public token.
-              You can get one for free at <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">mapbox.com</a>
+              Your Mapbox token is set. Click "Load Map" to display the real-time boat tracking map.
             </p>
             <div className="flex gap-2 max-w-md mx-auto">
               <Input
@@ -165,7 +164,7 @@ const Map = () => {
           ref={mapContainer} 
           className="w-full h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900"
         >
-          {!mapboxToken && (
+          {!mapLoaded && !mapboxToken && (
             <div className="flex items-center justify-center h-full">
               <div className="text-center text-muted-foreground">
                 <MapPin className="h-16 w-16 mx-auto mb-4 opacity-50" />
