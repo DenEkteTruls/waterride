@@ -8,6 +8,7 @@ import { MapPin, Navigation, Waves } from 'lucide-react';
 const Map = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const [mapboxToken, setMapboxToken] = useState('');
+  const [mapLoaded, setMapLoaded] = useState(false);
   const [boatLocation] = useState({
     lat: 60.3973,
     lng: 5.3247,
@@ -15,12 +16,15 @@ const Map = () => {
     speed: 12
   });
 
-  const loadMapboxMap = () => {
+  const loadMapboxMap = async () => {
     if (!mapContainer.current || !mapboxToken) return;
 
-    // Dynamically import mapbox-gl
-    import('mapbox-gl').then((mapboxgl) => {
-      import('mapbox-gl/dist/mapbox-gl.css');
+    try {
+      // Dynamically import mapbox-gl
+      const mapboxgl = await import('mapbox-gl');
+      
+      // Import CSS
+      await import('mapbox-gl/dist/mapbox-gl.css');
       
       (mapboxgl.default as any).accessToken = mapboxToken;
       
@@ -57,13 +61,17 @@ const Map = () => {
         .setLngLat([5.3247, 60.3973])
         .setPopup(new (mapboxgl.default as any).Popup().setHTML('<h3>Bryggen Harbor</h3><p>Waterride Base Station</p>'))
         .addTo(map);
+        
+        setMapLoaded(true);
       });
 
       // Cleanup function
       return () => {
         map.remove();
       };
-    });
+    } catch (error) {
+      console.error('Failed to load Mapbox:', error);
+    }
   };
 
   const createBoatMarker = () => {
@@ -156,7 +164,16 @@ const Map = () => {
         <div 
           ref={mapContainer} 
           className="w-full h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900"
-        />
+        >
+          {!mapboxToken && (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center text-muted-foreground">
+                <MapPin className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                <p>Enter Mapbox token to view the map</p>
+              </div>
+            </div>
+          )}
+        </div>
       </Card>
     </div>
   );
