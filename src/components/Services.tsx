@@ -1,44 +1,26 @@
 
 import { Card } from "@/components/ui/card";
-import { MapPin, Clock, Users, Star, Waves, Shield } from "lucide-react";
+import { MapPin, Box, House } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
       icon: MapPin,
-      title: "Harbor Transfers",
-      description: "Quick and comfortable transfers between Bergen's harbors and key locations.",
-      features: ["Direct routes", "Weather protected", "Luggage space"]
+      title: "Båt-taxi",
+      description: "Transport fra ett sted til et annet med båt.",
+      features: ["Direkte ruter", "Pålitelig transport", "Lokalkunnskap"]
     },
     {
-      icon: Clock,
-      title: "Scheduled Services",
-      description: "Regular scheduled departures throughout the day for popular destinations.",
-      features: ["Reliable timing", "Multiple stops", "Real-time updates"]
+      icon: Box,
+      title: "Transport av varer",
+      description: "Frakt av varer og utstyr til øyer og utilgjengelige steder.",
+      features: ["Sikker transport", "Ulike størrelser", "Fleksible løsninger"]
     },
     {
-      icon: Users,
-      title: "Private Charters",
-      description: "Exclusive boat charters for special occasions, business events, or sightseeing.",
-      features: ["Custom routes", "Onboard catering", "Professional crew"]
-    },
-    {
-      icon: Star,
-      title: "Premium Experience",
-      description: "Luxury service with comfortable seating, weather protection, and scenic routes.",
-      features: ["Heated cabins", "Panoramic views", "Refreshments"]
-    },
-    {
-      icon: Waves,
-      title: "Sightseeing Tours",
-      description: "Discover Bergen's coastline and fjords with our guided sightseeing tours.",
-      features: ["Expert guides", "Photo opportunities", "Local insights"]
-    },
-    {
-      icon: Shield,
-      title: "Safety First",
-      description: "All our boats meet the highest safety standards with certified crew members.",
-      features: ["Life jackets", "Emergency equipment", "Insurance covered"]
+      icon: House,
+      title: "Hytteservice",
+      description: "Tilsyn av eiendom og vedlikehold av hytter og anlegg.",
+      features: ["Regelmessig tilsyn", "Vedlikehold", "Rapportering"]
     }
   ];
 
@@ -47,15 +29,14 @@ const Services = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mb-6">
-            Our <span className="font-semibold">Services</span>
+            Våre <span className="font-semibold">Tjenester</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground font-light max-w-3xl mx-auto">
-            From quick harbor transfers to luxury charters, we provide comprehensive 
-            water transportation solutions tailored to your needs.
+          <p className="text-lg sm:text-xl text-muted-foreground font-light max-w-2xl mx-auto">
+            Vi tilbyr praktiske transportløsninger på vannet i Bergen-området.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
