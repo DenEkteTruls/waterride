@@ -47,8 +47,8 @@ const BookingForm = () => {
     console.log("Booking submitted:", data);
     
     toast({
-      title: "Booking Submitted!",
-      description: "We'll contact you shortly to confirm your water taxi booking.",
+      title: "Bestilling sendt!",
+      description: "Vi kontakter deg snart for å bekrefte båtturen.",
     });
     
     form.reset();
@@ -56,46 +56,43 @@ const BookingForm = () => {
   };
 
   const popularDestinations = [
-    "Bergen Airport (Flesland)",
-    "Bergen Fish Market",
-    "Troldhaugen",
-    "Mount Fløyen",
-    "Bergenhus Fortress",
-    "Bergen University",
-    "Custom Location"
+    "Askøy",
+    "Holsnøy", 
+    "Radøy",
+    "Osterøy",
+    "Sotra",
+    "Tysnesøy",
+    "Stord",
+    "Lindås"
   ];
 
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight mb-6">
-            Book Your <span className="font-semibold">Waterride</span>
+        <div className="text-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-light tracking-tight mb-4">
+            Bestill <span className="font-semibold">båttur</span>
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground font-light max-w-3xl mx-auto">
-            Reserve your premium boat taxi experience. Fill out the form below and we'll 
-            get back to you with confirmation and pricing details.
+          <p className="text-lg text-muted-foreground font-light max-w-2xl mx-auto">
+            Fyll ut skjemaet så kontakter vi deg med bekreftelse og pris.
           </p>
         </div>
 
         <div className="max-w-2xl mx-auto">
-          <Card className="p-6 sm:p-8 bg-background/60 backdrop-blur-sm border-border/50">
+          <Card className="p-6 bg-background/60 backdrop-blur-sm border-border/50">
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 {/* Personal Information */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
                     name="name"
-                    rules={{ required: "Name is required" }}
+                    rules={{ required: "Navn er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <Users className="h-4 w-4 mr-2" />
-                          Full Name
-                        </FormLabel>
+                        <FormLabel>Navn</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your name" {...field} />
+                          <Input placeholder="Ditt navn" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -105,13 +102,10 @@ const BookingForm = () => {
                   <FormField
                     control={form.control}
                     name="phone"
-                    rules={{ required: "Phone number is required" }}
+                    rules={{ required: "Telefon er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <Phone className="h-4 w-4 mr-2" />
-                          Phone Number
-                        </FormLabel>
+                        <FormLabel>Telefon</FormLabel>
                         <FormControl>
                           <Input placeholder="+47 123 45 678" {...field} />
                         </FormControl>
@@ -119,46 +113,40 @@ const BookingForm = () => {
                       </FormItem>
                     )}
                   />
-                </div>
 
-                <FormField
-                  control={form.control}
-                  name="email"
-                  rules={{ 
-                    required: "Email is required",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "Invalid email address"
-                    }
-                  }}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="flex items-center">
-                        <Mail className="h-4 w-4 mr-2" />
-                        Email Address
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="your@email.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    rules={{ 
+                      required: "E-post er påkrevd",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Ugyldig e-postadresse"
+                      }
+                    }}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>E-post</FormLabel>
+                        <FormControl>
+                          <Input placeholder="din@epost.no" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 {/* Journey Details */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="pickup"
-                    rules={{ required: "Pickup location is required" }}
+                    rules={{ required: "Hentested er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          Pickup Location
-                        </FormLabel>
+                        <FormLabel>Fra</FormLabel>
                         <FormControl>
-                          <Input placeholder="Bryggen Harbor" {...field} />
+                          <Input placeholder="Bryggen" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -168,15 +156,12 @@ const BookingForm = () => {
                   <FormField
                     control={form.control}
                     name="destination"
-                    rules={{ required: "Destination is required" }}
+                    rules={{ required: "Destinasjon er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          Destination
-                        </FormLabel>
+                        <FormLabel>Til</FormLabel>
                         <FormControl>
-                          <Input placeholder="Select destination" {...field} />
+                          <Input placeholder="Velg destinasjon" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -186,8 +171,8 @@ const BookingForm = () => {
 
                 {/* Popular Destinations */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Popular Destinations</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                  <label className="text-sm font-medium mb-2 block">Populære destinasjoner</label>
+                  <div className="grid grid-cols-4 gap-2">
                     {popularDestinations.map((dest) => (
                       <Button
                         key={dest}
@@ -195,7 +180,7 @@ const BookingForm = () => {
                         variant="outline"
                         size="sm"
                         onClick={() => form.setValue("destination", dest)}
-                        className="text-xs h-8 justify-start"
+                        className="text-xs h-8"
                       >
                         {dest}
                       </Button>
@@ -203,18 +188,15 @@ const BookingForm = () => {
                   </div>
                 </div>
 
-                {/* Date and Time */}
+                {/* Date, Time and Passengers */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <FormField
                     control={form.control}
                     name="date"
-                    rules={{ required: "Date is required" }}
+                    rules={{ required: "Dato er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          Date
-                        </FormLabel>
+                        <FormLabel>Dato</FormLabel>
                         <FormControl>
                           <Input type="date" {...field} />
                         </FormControl>
@@ -226,13 +208,10 @@ const BookingForm = () => {
                   <FormField
                     control={form.control}
                     name="time"
-                    rules={{ required: "Time is required" }}
+                    rules={{ required: "Tid er påkrevd" }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <Clock className="h-4 w-4 mr-2" />
-                          Time
-                        </FormLabel>
+                        <FormLabel>Tid</FormLabel>
                         <FormControl>
                           <Input type="time" {...field} />
                         </FormControl>
@@ -245,16 +224,13 @@ const BookingForm = () => {
                     control={form.control}
                     name="passengers"
                     rules={{ 
-                      required: "Number of passengers is required",
-                      min: { value: 1, message: "At least 1 passenger required" },
-                      max: { value: 12, message: "Maximum 12 passengers" }
+                      required: "Antall passasjerer er påkrevd",
+                      min: { value: 1, message: "Minst 1 passasjer" },
+                      max: { value: 12, message: "Maks 12 passasjerer" }
                     }}
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="flex items-center">
-                          <Users className="h-4 w-4 mr-2" />
-                          Passengers
-                        </FormLabel>
+                        <FormLabel>Passasjerer</FormLabel>
                         <FormControl>
                           <Input 
                             type="number" 
@@ -276,11 +252,11 @@ const BookingForm = () => {
                   name="notes"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Additional Notes (Optional)</FormLabel>
+                      <FormLabel>Tilleggsnotater (valgfritt)</FormLabel>
                       <FormControl>
                         <textarea
-                          className="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          placeholder="Any special requirements or notes..."
+                          className="flex min-h-[60px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          placeholder="Spesielle behov eller notater..."
                           {...field}
                         />
                       </FormControl>
@@ -292,18 +268,18 @@ const BookingForm = () => {
                 {/* Submit Button */}
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-6 text-lg font-medium rounded-xl"
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-4 text-lg font-medium rounded-xl"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Submitting..." : "Book Your Waterride"}
+                  {isSubmitting ? "Sender..." : "Bestill båttur"}
                 </Button>
               </form>
             </Form>
 
             {/* Contact Info */}
-            <div className="mt-8 pt-6 border-t border-border/50 text-center">
+            <div className="mt-6 pt-4 border-t border-border/50 text-center">
               <p className="text-sm text-muted-foreground mb-2">
-                Need immediate assistance?
+                Trenger hjelp umiddelbart?
               </p>
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm">
                 <a href="tel:+4712345678" className="flex items-center hover:text-primary">
